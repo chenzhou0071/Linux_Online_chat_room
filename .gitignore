@@ -1,0 +1,70 @@
+# 编译输出文件
+build/
+*.o
+*.exe
+*.out
+*.app
+
+# 可执行文件
+chat_server
+server/chat_server
+
+# CMake 生成文件
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# IDE 配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+
+# 系统文件
+Thumbs.db
+Desktop.ini
+
+# 备份文件
+*.bak
+*.backup
+
+# 压缩文件
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# 文档草稿 (保留最终版本)
+docs/*.docx
+docs/系统架构设计文档.md
+docs/开发问题与解决方案.md
+docs/plans
+
+# 本地配置
+.claude/settings.local.json
+
+# Node modules (如果后续使用 Node.js)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python 相关 (如果使用 Python HTTP 服务器)
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+env/
+venv/

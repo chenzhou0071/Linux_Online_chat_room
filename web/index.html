@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聊天室</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- 左侧用户列表 -->
+        <div class="sidebar">
+            <div class="sidebar-header">在线用户</div>
+            <div class="user-list" id="userList">
+                <!-- 用户列表将在这里动态生成 -->
+            </div>
+        </div>
+
+        <!-- 右侧聊天区域 -->
+        <div class="chat-main">
+            <!-- 聊天头部 -->
+            <div class="chat-header">
+                <h2>聊天室</h2>
+            </div>
+
+            <!-- 用户信息栏 -->
+            <div class="user-info-bar">
+                <span class="my-name" id="myNameDisplay">未设置</span>
+                <div class="user-actions">
+                    <button class="action-btn" onclick="showRenameInput()">
+                        <span class="btn-icon"></span>改名
+                    </button>
+                    <button class="action-btn danger" onclick="clearHistory()">
+                        <span class="btn-icon"></span>清空
+                    </button>
+                </div>
+            </div>
+
+            <!-- 改名输入框 -->
+            <div class="rename-area" id="renameArea">
+                <input type="text" id="renameInput" placeholder="输入新名字">
+                <button onclick="changeName()">确定</button>
+                <button onclick="cancelRename()">取消</button>
+            </div>
+
+            <!-- 消息显示区域 -->
+            <div class="messages" id="messages">
+                <div class="message system">欢迎来到聊天室！</div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="输入消息..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>
