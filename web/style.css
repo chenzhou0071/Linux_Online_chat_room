@@ -242,6 +242,15 @@ body {
     background: linear-gradient(90deg, #eff6ff 0%, #f3e8ff 100%);
 }
 
+/* 时间分隔符 */
+.time-divider {
+    align-self: center;
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 8px 0;
+    padding: 4px 12px;
+}
+
 .message {
     max-width: 60%;
     padding: 14px 20px;

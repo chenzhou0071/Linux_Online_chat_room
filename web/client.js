@@ -3,6 +3,10 @@ let ws = null;
 let myName = '';
 let myUserId = '';
 
+// 时间戳相关
+let lastMessageTime = 0;
+let lastShowedTime = 0;
+
 // 生成或获取用户 ID
 function getOrCreateUserId() {
     let userId = localStorage.getItem('chatUserId');
@@ -166,6 +170,13 @@ function handleMessage(data) {
 
 // 添加消息到界面
 function addMessage(text, type, sender, shouldSave = true) {
+    const now = Date.now();
+
+    // 检查是否需要显示时间
+    if (shouldShowTime(now)) {
+        insertTimeDivider(now);
+    }
+
     const messagesDiv = document.getElementById('messages');
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message ' + type;
@@ -190,6 +201,50 @@ function addMessage(text, type, sender, shouldSave = true) {
     if (shouldSave) {
         saveToHistory(text, type, sender);
     }
+
+    // 更新最后一条消息时间
+    lastMessageTime = now;
+}
+
+// 判断是否应该显示时间
+function shouldShowTime(now) {
+    // 如果是第一条消息，不显示时间
+    if (lastMessageTime === 0) {
+        return false;
+    }
+
+    const timeSinceLastMessage = now - lastMessageTime;
+    const timeSinceLastShow = now - lastShowedTime;
+
+    // 规则1: 距离上一条消息超过5分钟，显示时间
+    if (timeSinceLastMessage > 5 * 60 * 1000) {
+        return true;
+    }
+
+    // 规则2: 连续聊天时，每隔15分钟显示一次时间
+    if (timeSinceLastShow > 15 * 60 * 1000) {
+        return true;
+    }
+
+    return false;
+}
+
+// 插入时间分隔符
+function insertTimeDivider(timestamp) {
+    const date = new Date(timestamp);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const timeStr = `${hours}:${minutes}`;
+
+    const messagesDiv = document.getElementById('messages');
+    const timeDiv = document.createElement('div');
+    timeDiv.className = 'time-divider';
+    timeDiv.textContent = timeStr;
+
+    messagesDiv.appendChild(timeDiv);
+
+    // 更新最后显示时间的时间戳
+    lastShowedTime = timestamp;
 }
 
 // 保存消息到历史记录
